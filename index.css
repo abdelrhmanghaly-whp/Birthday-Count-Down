@@ -1,0 +1,52 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("images/img.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.countdown-container {
+    text-align: center;
+    padding-top: 60px;
+}
+
+h1 {
+    font-size: 90px;
+}
+
+#countdown {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+h1,
+#countdown {
+    /* color: rgb(130, 196, 234);*/
+    color: rgb(160, 220, 255);
+    padding: 90px;
+}
+
+.animated {
+    animation: bounce 0.5s ease infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10px);
+    }
+}
