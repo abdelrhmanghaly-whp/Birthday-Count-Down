@@ -14,7 +14,7 @@ This project provides a way to countdown to a my birthday date. It displays the 
 
 ## Installation
 
-Since this is a web application, there's no installation process required. Simply access the <b>[live demo](https://your-demo-url.com)</b> to start the countdown.
+Since this is a web application, there's no installation process required. Simply access the <b>[live demo](https://abdelrhmanghaly-whp.github.io/Birthday-Count-Down/)</b> to start the countdown.
 
 ## Usage
 
