@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (difference < 0) {
             birthday.setFullYear(birthday.getFullYear() + 1);
-            difference = birthday - now; // recalculate difference
+            difference = birthday - now;
         }
 
         const diffSeconds = Math.floor(difference / 1000);
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         countdownElement.innerHTML = `${days} Days ${hours} Hours ${minutes} Minutes and ${seconds} Seconds`;
 
         if (difference <= 0) {
-            clearInterval(intervalId); // Stop the countdown interval
+            clearInterval(intervalId);
             startCelebration();
         }
     }
@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             toggleCount++;
             if (toggleCount >= 60) {
-                clearInterval(celebrationInterval); // Stop after 1 minute
+                clearInterval(celebrationInterval); 
                 headingElement.innerHTML = "";
                 countdownElement.classList.remove('hidden');
-                intervalId = setInterval(updateCountdown, 1000); // Resume countdown
+                intervalId = setInterval(updateCountdown, 1000);
             }
         }, 1000);
     }
