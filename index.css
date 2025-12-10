@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,9 +17,14 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
+.hidden {
+    display: none !important;
+}
+
+/* ============ COUNTDOWN STYLES ============ */
 .countdown-container {
     text-align: center;
     padding: 20px;
@@ -25,10 +32,12 @@ body {
     width: 100%;
 }
 
-h1 {
+.countdown-container h1 {
     font-size: clamp(32px, 8vw, 90px);
     line-height: 1.2;
     margin-bottom: 20px;
+    color: rgb(160, 220, 255);
+    padding: 20px;
 }
 
 #countdown {
@@ -37,32 +46,282 @@ h1 {
     line-height: 1.4;
     word-wrap: break-word;
     padding: 0 10px;
-}
-
-h1,
-#countdown {
-    /* color: rgb(130, 196, 234);*/
     color: rgb(160, 220, 255);
     padding: 20px;
 }
 
-.animated {
-    animation: bounce 0.5s ease infinite alternate;
+/* ============ CELEBRATION STYLES ============ */
+#celebration-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
 }
 
-@keyframes bounce {
-    from {
-        transform: translateY(0);
-    }
+#celebration-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(255, 100, 150, 0.1) 0%, transparent 70%);
+    animation: pulse-bg 4s ease-in-out infinite;
+}
 
-    to {
-        transform: translateY(-10px);
+@keyframes pulse-bg {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* ============ BIRTHDAY MESSAGE ============ */
+.birthday-message {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    animation: scale-in 1s ease-out forwards;
+}
+
+@keyframes scale-in {
+    0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
     }
 }
 
+.cake-emoji {
+    font-size: clamp(60px, 15vw, 150px);
+    animation: cake-bounce 1s ease-in-out infinite, cake-glow 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 200, 100, 0.8));
+}
 
+@keyframes cake-bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+}
+
+@keyframes cake-glow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 200, 100, 0.8)); }
+    50% { filter: drop-shadow(0 0 60px rgba(255, 150, 200, 1)); }
+}
+
+.birthday-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(40px, 12vw, 110px);
+    color: #fff;
+    text-shadow: 
+        0 0 20px rgba(255, 150, 200, 0.6),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: float-text 3s ease-in-out infinite;
+    position: relative;
+    padding: 20px;
+    letter-spacing: 2px;
+}
+
+@keyframes float-text {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* ============ PARTY EMOJIS ============ */
+.party-emojis {
+    display: flex;
+    justify-content: center;
+    gap: clamp(15px, 5vw, 40px);
+    margin-top: 30px;
+}
+
+.emoji {
+    font-size: clamp(30px, 8vw, 60px);
+    display: inline-block;
+}
+
+.float-1 { animation: float-emoji 2s ease-in-out infinite; }
+.float-2 { animation: float-emoji 2.2s ease-in-out infinite 0.2s; }
+.float-3 { animation: float-emoji 1.8s ease-in-out infinite 0.4s; }
+.float-4 { animation: float-emoji 2.4s ease-in-out infinite 0.6s; }
+.float-5 { animation: float-emoji 2s ease-in-out infinite 0.8s; }
+
+@keyframes float-emoji {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(10deg); }
+    75% { transform: translateY(-15px) rotate(-10deg); }
+}
+
+/* ============ CONFETTI ============ */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: -20px;
+    animation: confetti-fall linear forwards;
+}
+
+.confetti.square { border-radius: 2px; }
+.confetti.circle { border-radius: 50%; }
+.confetti.triangle {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 12px solid currentColor;
+    background: transparent !important;
+}
+.confetti.star {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg) scale(0.5);
+        opacity: 0.3;
+    }
+}
+
+/* ============ BALLOONS ============ */
+.balloons-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    bottom: -100px;
+    font-size: 50px;
+    animation: balloon-rise linear forwards;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+}
+
+@keyframes balloon-rise {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(20deg);
+        opacity: 0.8;
+    }
+}
+
+/* ============ SPARKLES ============ */
+.sparkles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 20px;
+    animation: sparkle-pop 1s ease-out forwards;
+}
+
+@keyframes sparkle-pop {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ============ FIREWORKS ============ */
+.fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: firework-explode 1.5s ease-out forwards;
+}
+
+@keyframes firework-explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.firework-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: particle-fly 1.5s ease-out forwards;
+}
+
+@keyframes particle-fly {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ============ MEDIA QUERIES ============ */
 @media (max-width: 1024px) {
-    h1 {
+    .countdown-container h1 {
         font-size: clamp(28px, 7vw, 70px);
         padding: 15px;
     }
@@ -73,13 +332,12 @@ h1,
     }
 }
 
-
 @media (max-width: 768px) {
     .countdown-container {
         padding: 15px;
     }
 
-    h1 {
+    .countdown-container h1 {
         font-size: clamp(24px, 6vw, 50px);
         padding: 10px;
         margin-bottom: 15px;
@@ -89,15 +347,22 @@ h1,
         font-size: clamp(16px, 3vw, 30px);
         padding: 10px 5px;
     }
-}
 
+    .birthday-text {
+        font-size: clamp(35px, 10vw, 80px);
+    }
+
+    .cake-emoji {
+        font-size: clamp(50px, 12vw, 100px);
+    }
+}
 
 @media (max-width: 480px) {
     .countdown-container {
         padding: 10px;
     }
 
-    h1 {
+    .countdown-container h1 {
         font-size: clamp(20px, 5vw, 36px);
         padding: 8px;
         margin-bottom: 10px;
@@ -107,11 +372,18 @@ h1,
         font-size: clamp(14px, 2.5vw, 24px);
         padding: 8px 5px;
     }
+
+    .birthday-text {
+        font-size: clamp(28px, 9vw, 60px);
+    }
+
+    .party-emojis {
+        gap: 10px;
+    }
 }
 
-
 @media (max-width: 360px) {
-    h1 {
+    .countdown-container h1 {
         font-size: clamp(18px, 4.5vw, 28px);
         padding: 5px;
     }
@@ -119,5 +391,9 @@ h1,
     #countdown {
         font-size: clamp(12px, 2vw, 20px);
         padding: 5px;
+    }
+
+    .birthday-text {
+        font-size: clamp(24px, 8vw, 50px);
     }
 }
